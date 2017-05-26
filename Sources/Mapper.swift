@@ -346,8 +346,6 @@ public struct Mapper {
         return (try? transformation(try self.JSONFromField(field))).flatMap { $0 }
     }
 
-    // MARK: - Private
-
     /// Get the object for a given field. If an empty string is passed, return the entire data source. This
     /// allows users to create objects from multiple fields in the top level of the data source
     ///
@@ -357,7 +355,7 @@ public struct Mapper {
     /// - throws: MapperError.missingFieldError if the field doesn't exist
     ///
     /// - returns: The object for the given field
-    private func JSONFromField(_ field: String) throws -> Any {
+    public func JSONFromField(_ field: String) throws -> Any {
         if let value = field.isEmpty ? self.JSON : self.JSON.safeValue(forKeyPath: field) {
             return value
         }
